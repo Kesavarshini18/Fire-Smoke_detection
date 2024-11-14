@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YOLOv8 Real-Time Fire & Smoke Detection System</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #2c2f33;
+        color: #ffffff;
+      }
+      .container {
+        margin-top: 50px;
+      }
+      .card {
+        background-color: #23272a;
+        border: none;
+      }
+      .btn-custom {
+        background-color: #7289da;
+        color: white;
+      }
+      .btn-custom:hover {
+        background-color: #5b6eae;
+      }
+      .custom-file-label {
+        background-color: #2c2f33;
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container text-center">
+      <h1 class="mb-4">Real-Time Fire & Smoke Detection</h1>
+      <div class="card p-4">
+        <form action="/upload" method="post" enctype="multipart/form-data">
+          <div class="custom-file mb-3">
+            <input
+              type="file"
+              class="custom-file-input"
+              id="fileInput"
+              name="file"
+              accept="video/*"
+              required
+            />
+            <label class="custom-file-label" for="fileInput"
+              >Choose video file...</label
+            >
+          </div>
+          <button type="submit" class="btn btn-custom btn-block">
+            Upload Video
+          </button>
+        </form>
+      </div>
+      <div class="card mt-4 p-4">
+        <h2 class="mb-4">Detection Results:</h2>
+        <img
+          src="{{ url_for('video_feed') }}"
+          class="img-fluid"
+          alt="Detection Results"
+        />
+      </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      // Update the label of the file input with the selected file name
+      $("#fileInput").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).next(".custom-file-label").html(fileName);
+      });
+    </script>
+  </body>
+</html>
